@@ -1,11 +1,15 @@
-import { NextPage } from "next";
+import { NextPageContext } from 'next';
 
-const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
+interface HomeProps {
+  userAgent?: string;
+}
+
+const Home = ({ userAgent }: HomeProps): React.ReactElement => (
   <h1>Hello world! - user agent: {userAgent}</h1>
 );
 
-Home.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers["user-agent"] || "" : navigator.userAgent;
+Home.getInitialProps = async ({ req }: NextPageContext): Promise<HomeProps> => {
+  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
   return { userAgent };
 };
 
