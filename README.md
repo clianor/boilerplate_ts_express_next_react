@@ -117,3 +117,111 @@ module.exports = {
   },
 };
 ```
+
+
+### 4. StoryBook 설치 및 셋팅
+### 스토리북 프로젝트 설치 및 셋팅
+```properties
+npx -p @storybook/cli sb init --type react
+npm install @storybook/addon-knobs @storybook/addon-docs react react-is babel-loader prop-types --save-dev
+```
+- @storybook/addon-knobs: 컴포넌트의 props 를 스토리북 화면에서 바꿔서 바로 반영시켜줄 수 있는 애드온
+- @storybook/addon-docs: MDX 형식으로 문서를 작성 할 수 있게 해주고, 컴포넌트의 props와 주석에 기반하여 자동으로 아주 멋진 문서를 자동생성
+
+<br>
+
+### 스토리북에 typescript 추가
+```properties
+npm install babel-preset-react-app react-docgen-typescript-loader --save-dev
+```
+- babel-preset-react-app: create-react-app 에서 사용하는 babel preset 과 동일합니다. TypeScript를 적용 할 때 우리는 babel-loader 를 사용 할 것입니다. 참고로 babel-loader는 Storybook 프로젝트에 이미 설치가 되어있습니다.
+- react-docgen-typescript-loader: 컴포넌트의 props 에서 사용된 TypeScript 타입들을 추출하여 문서로 만들어주는 도구입니다. 우리가 이전에 PropTypes 를 작성하여 DocsPage 에서 보여줬었던 것 처럼 말이지요.
+
+<br>
+
+### .storybook/main.js 파일 수정
+```js
+module.exports = {
+  stories: ['../src/**/*.stories.(js|ts|tsx|mdx)'],
+  addons: [
+    '@storybook/addon-actions',
+    '@storybook/addon-links',
+    '@storybook/addon-knobs/register',
+    '@storybook/addon-docs',
+  ],
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            presets: [['react-app', { flow: false, typescript: true }]],
+          },
+        },
+        require.resolve('react-docgen-typescript-loader'),
+      ],
+    });
+    config.resolve.extensions.push('.ts', '.tsx');
+    return config;
+  },
+};
+```
+
+<br>
+
+### emotion 설치
+```properties
+npm install @emotion/core --save
+```
+
+<br>
+
+### babel-plugin-named-asset-import 설치
+```properties
+npm install babel-plugin-named-asset-import --save-dev 
+```
+
+<br>
+
+### .storybook/main.js 수정
+```js
+module.exports = {
+  stories: ['../src/**/*.stories.(js|ts|tsx|mdx)'],
+  addons: [
+    '@storybook/addon-actions',
+    '@storybook/addon-links',
+    '@storybook/addon-knobs/register',
+    '@storybook/addon-docs',
+  ],
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            presets: [['react-app', { flow: false, typescript: true }]],
+            plugins: [
+              [
+                require.resolve('babel-plugin-named-asset-import'),
+                {
+                  loaderMap: {
+                    svg: {
+                      ReactComponent:
+                        '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+                    },
+                  },
+                },
+              ],
+            ],
+          },
+        },
+        require.resolve('react-docgen-typescript-loader'),
+      ],
+    });
+    config.resolve.extensions.push('.ts', '.tsx');
+    return config;
+  },
+};
+```
