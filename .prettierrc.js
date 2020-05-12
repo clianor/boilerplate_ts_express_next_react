@@ -6,4 +6,4 @@ module.exports = {
   useTabs: false, // 탭 대신에 스페이스를 사용합니다.
   tabWidth: 2, // 들여쓰기 크기는 2칸입니다.
   endOfLine: 'lf',
-};
+}
