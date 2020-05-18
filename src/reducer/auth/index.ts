@@ -1,5 +1,15 @@
-import { LoginState, LOGIN_REQUEST, LOGIN_SUCCESS } from './login';
-import { RegisterState, REGISTER_REQUEST, REGISTER_SUCCESS } from './register';
+import {
+  LoginState,
+  LOGIN_INITIALIZE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+} from './login';
+import {
+  RegisterState,
+  REGISTER_INITIALIZE,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+} from './register';
 
 export interface State {
   [key: string]: any;
@@ -64,6 +74,13 @@ const reducer = (state = initialState, payload: any) => {
         ...state,
         authorization: payload.data.authorization,
       };
+    case LOGIN_INITIALIZE:
+      return {
+        ...state,
+        ['login']: {
+          ...initialState.login,
+        },
+      };
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -77,6 +94,13 @@ const reducer = (state = initialState, payload: any) => {
         ...state,
         authorization: payload.data.authorization,
         error: '',
+      };
+    case REGISTER_INITIALIZE:
+      return {
+        ...state,
+        ['register']: {
+          ...initialState.register,
+        },
       };
     case REGISTER_REQUEST:
       return {

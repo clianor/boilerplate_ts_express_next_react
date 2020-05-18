@@ -1,8 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useCallback } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFieldAction } from '../../reducer/auth';
-import { registerAction } from '../../reducer/auth/register';
+import {
+  registerAction,
+  registerInitAction,
+} from '../../reducer/auth/register';
 import { State } from '../../store';
 import AuthForm from '../../components/auth/AuthForm';
 
@@ -17,6 +20,10 @@ const RegisterForm = () => {
     if (authorization) {
       router.push('/');
     }
+
+    return () => {
+      dispatch(registerInitAction());
+    };
   }, [authorization]);
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
