@@ -1,10 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { errorAction } from '../../reducer/auth';
 import {
   RegisterState,
-  errorAction,
   registerSuccessAction,
   REGISTER_REQUEST,
-} from '../../reducer/auth';
+} from '../../reducer/auth/register';
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 
@@ -31,7 +31,7 @@ function* registerSagaAction(action: any) {
     sessionStorage.setItem('authorization', JSON.stringify(result.data));
     yield put(registerSuccessAction(result.data));
   } catch (e) {
-    yield put(errorAction(e.message));
+    yield put(errorAction('회원가입에 실패했습니다.'));
   }
 }
 

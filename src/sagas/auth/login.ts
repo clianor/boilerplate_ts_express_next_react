@@ -1,10 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { errorAction } from '../../reducer/auth/';
 import {
   LoginState,
-  errorAction,
   loginSuccessAction,
   LOGIN_REQUEST,
-} from '../../reducer/auth';
+} from '../../reducer/auth/login';
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 
@@ -26,7 +26,7 @@ function* loginSagaAction(action: any) {
     sessionStorage.setItem('authorization', JSON.stringify(result.data));
     yield put(loginSuccessAction(result.data));
   } catch (e) {
-    yield put(errorAction(e.message));
+    yield put(errorAction('로그인에 실패했습니다.'));
   }
 }
 

@@ -1,14 +1,6 @@
-export interface LoginState {
-  email: string;
-  password: string;
-}
+import { LoginState, LOGIN_REQUEST, LOGIN_SUCCESS } from './login';
+import { RegisterState, REGISTER_REQUEST, REGISTER_SUCCESS } from './register';
 
-export interface RegisterState {
-  email: string;
-  company: string;
-  password: string;
-  passwordConfirm: string;
-}
 export interface State {
   [key: string]: any;
   register: RegisterState;
@@ -34,10 +26,6 @@ export const initialState: State = {
 
 export const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 export const LOAD_TOKEN = 'auth/LOAD_TOKEN';
-export const LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
-export const REGISTER_REQUEST = 'auth/REGISTER_REQUEST';
-export const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
 export const SET_ERROR = 'auth/ERROR';
 
 export const changeFieldAction = (data: any) => {
@@ -50,34 +38,6 @@ export const changeFieldAction = (data: any) => {
 export const loadTokenAction = (data: any) => {
   return {
     type: LOAD_TOKEN,
-    data,
-  };
-};
-
-export const loginAction = (data: any) => {
-  return {
-    type: LOGIN_REQUEST,
-    data,
-  };
-};
-
-export const loginSuccessAction = (data: any) => {
-  return {
-    type: LOGIN_SUCCESS,
-    data,
-  };
-};
-
-export const registerAction = (data: any) => {
-  return {
-    type: REGISTER_REQUEST,
-    data,
-  };
-};
-
-export const registerSuccessAction = (data: any) => {
-  return {
-    type: REGISTER_SUCCESS,
     data,
   };
 };

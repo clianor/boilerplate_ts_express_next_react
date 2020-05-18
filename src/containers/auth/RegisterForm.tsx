@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFieldAction, registerAction } from '../../reducer/auth';
+import { changeFieldAction } from '../../reducer/auth';
+import { registerAction } from '../../reducer/auth/register';
 import { State } from '../../store';
 import AuthForm from '../../components/auth/AuthForm';
 
