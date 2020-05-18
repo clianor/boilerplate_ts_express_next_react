@@ -5,6 +5,7 @@ export interface LoginState {
 
 export interface RegisterState {
   email: string;
+  company: string;
   password: string;
   passwordConfirm: string;
 }
@@ -19,6 +20,7 @@ export interface State {
 export const initialState: State = {
   register: {
     email: '',
+    company: '',
     password: '',
     passwordConfirm: '',
   },
@@ -66,6 +68,20 @@ export const loginSuccessAction = (data: any) => {
   };
 };
 
+export const registerAction = (data: any) => {
+  return {
+    type: REGISTER_REQUEST,
+    data,
+  };
+};
+
+export const registerSuccessAction = (data: any) => {
+  return {
+    type: REGISTER_SUCCESS,
+    data,
+  };
+};
+
 export const errorAction = (data: any) => {
   return {
     type: SET_ERROR,
@@ -107,6 +123,7 @@ const reducer = (state = initialState, payload: any) => {
         ...state,
         ['register']: {
           email: payload.data.email,
+          company: payload.data.company,
           password: payload.data.password,
           passwordConfirm: payload.data.passwordConfirm,
         },

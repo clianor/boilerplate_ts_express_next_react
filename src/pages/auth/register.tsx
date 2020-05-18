@@ -1,9 +1,10 @@
 import MainLayout from '../../layouts/common/MainLayout';
+import RegisterForm from '../../containers/auth/RegisterForm';
 
 const Register = (): React.ReactElement => {
   return (
     <MainLayout>
-      <div>Register</div>
+      <RegisterForm />
     </MainLayout>
   );
 };

@@ -33,6 +33,16 @@ const AuthForm = ({ type, form, error, onChange, onSubmit }: AuthFormProps) => {
           onChange={onChange}
         />
 
+        {type === 'register' && (
+          <input
+            name="company"
+            placeholder="회사코드"
+            type="company"
+            value={form.company}
+            onChange={onChange}
+          />
+        )}
+
         <input
           name="password"
           placeholder="비밀번호"
