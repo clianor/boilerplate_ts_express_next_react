@@ -8,7 +8,7 @@ import { State } from '../../reducer/auth';
 const style = css`
   overflow: hidden;
   background-color: #f1f1f1;
-  padding: 20px 10px;
+  padding: 10px 10px;
 
   a {
     float: left;

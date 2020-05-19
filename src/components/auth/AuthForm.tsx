@@ -23,7 +23,8 @@ const textMap: StrMap = {
 const AuthForm = ({ type, form, error, onChange, onSubmit }: AuthFormProps) => {
   return (
     <div className="AuthForm">
-      <h3>{textMap[type]}</h3>
+      <div className="AuthForm_Header"></div>
+
       <form onSubmit={onSubmit}>
         <input
           name="email"

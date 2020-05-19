@@ -6,8 +6,12 @@ import { useDispatch } from 'react-redux';
 import { loadTokenAction } from '../../reducer/auth';
 
 const style = css`
-  padding-top: 60px;
-  background-color: lightblue;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 `;
 
 interface MainProps {
