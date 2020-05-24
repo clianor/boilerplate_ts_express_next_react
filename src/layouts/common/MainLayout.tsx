@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux';
 import { loadTokenAction } from '../../reducer/auth';
 
 const style = css`
-  position: relative;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
